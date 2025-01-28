@@ -26,4 +26,5 @@ Runned on terminal:
   </details>
 4. `flutterfire configure` inside the project folder, select the **create a new project** option and then follow instructions
 5. added `firebase_core:` in pubspec
+6. Inside firebase console (console.firebase.google.com), went to authentication > get start > email/pass
 </details>
