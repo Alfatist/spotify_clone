@@ -1,4 +1,3 @@
 # spotify_clone
 
-A spotify project clone from youtube.
-It's not mine.
+A spotify project clone using clean, bloc and firebase.
