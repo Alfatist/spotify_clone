@@ -15,10 +15,12 @@ class GetStartedPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(0),
             decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(AppImages.introBG))),
+                image: DecorationImage(
+                    fit: BoxFit.fill, image: AssetImage(AppImages.introBG))),
           ),
+
           Container(
             color: Colors.black.withOpacity(0.15),
           ),

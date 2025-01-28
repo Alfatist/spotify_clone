@@ -11,6 +11,9 @@ dependencies:
     sdk: flutter
   
   flutter_svg:
+  flutter_bloc:
+  hydrated_bloc:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
