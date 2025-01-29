@@ -18,6 +18,8 @@ dependencies:
   firebase_auth:
   get_it:
   fpdart: #dartz substitute
+  cloud_firestore:
+  
 
 dev_dependencies:
   flutter_test:

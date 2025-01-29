@@ -24,7 +24,15 @@ Runned on terminal:
     The solution was run `cd /etc/profile`, locate bash.bashrc, `sudo nano bash.bashrc` and then pasting the command above.
 
   </details>
+
 4. `flutterfire configure` inside the project folder, select the **create a new project** option and then follow instructions
+
 5. added `firebase_core:` in pubspec
+
 6. Inside firebase console (console.firebase.google.com), went to authentication > get start > email/pass
 </details>
+
+## firestore
+
+I created a collection of mocked Songs to display and save the fullname and email on a collection called Users. I also modified Firestore rule to:
+`allow read, write: if request.auth != null;`
