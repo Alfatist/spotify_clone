@@ -9,4 +9,5 @@ class AppVectors {
   static const String moon = "${basePath}moon$format";
   static const String topPattern = "${basePath}top_pattern$format";
   static const String bottomPattern = "${basePath}bottomPattern$format";
+  static const String homeTopCard = "${basePath}home_top_card$format";
 }
