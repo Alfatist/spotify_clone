@@ -6,6 +6,7 @@ import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
+import 'package:spotify_clone/presentation/auth/%20%20pages/signin.dart';
 import 'package:spotify_clone/presentation/auth/%20%20pages/signup.dart';
 
 class SignupOrSignin extends StatelessWidget {
@@ -20,6 +21,14 @@ class SignupOrSignin extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: SvgPicture.asset(AppVectors.topPattern),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: SvgPicture.asset(AppVectors.bottomPattern),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Image.asset(AppImages.authBG),
           ),
           Align(
             alignment: Alignment.center,
@@ -75,7 +84,14 @@ class SignupOrSignin extends StatelessWidget {
                         width: 20,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SigninPage(),
+                            ),
+                          );
+                        },
                         child: Text(
                           "Sign in",
                           style: TextStyle(
@@ -91,14 +107,6 @@ class SignupOrSignin extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: SvgPicture.asset(AppVectors.bottomPattern),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Image.asset(AppImages.authBG),
           ),
         ],
       ),

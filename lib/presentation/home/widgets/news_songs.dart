@@ -4,8 +4,8 @@ import 'package:spotify_clone/common/helpers/is_dark_mode.dart';
 import 'package:spotify_clone/core/configs/constants/app_urls.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
+import 'package:spotify_clone/presentation/home/bloc/news_songs_cubit.dart';
 import 'package:spotify_clone/presentation/home/bloc/news_songs_state.dart';
-import 'package:spotify_clone/presentation/home/pages/bloc/news_songs_cubit.dart';
 
 class NewsSongs extends StatelessWidget {
   const NewsSongs({super.key});
@@ -35,69 +35,76 @@ class NewsSongs extends StatelessWidget {
 
   Widget _songs(List<SongEntity> songs) {
     return ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "${AppURLs.firestorage + songs[index].artist} - ${songs[index].title}.jpg?${AppURLs.mediaAlt}"),
-                      ),
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        debugPrint(
+            '${AppURLs.firestorage}${Uri.encodeComponent("${songs[index].artist} - ${songs[index].title}")}.jpg?${AppURLs.mediaAlt}');
+        return SizedBox(
+          width: 160,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                /// Adicionando key única para cada item, os itens não serão renderizados sempre que o usuário scrolar
+                key: PageStorageKey<String>(
+                    'song-${songs[index].title}-${songs[index].artist}'),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          '${AppURLs.firestorage}${Uri.encodeComponent("${songs[index].artist} - ${songs[index].title}")}.jpg?${AppURLs.mediaAlt}'),
                     ),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        transform: Matrix4.translationValues(-10, 10, 0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: context.isDarkMode
-                              ? AppColors.darkGrey
-                              : const Color(0xffE6E6E6),
-                        ),
-                        child: Icon(
-                          Icons.play_arrow_rounded,
-                          color: context.isDarkMode
-                              ? const Color(0xff959595)
-                              : const Color(0xff555555),
-                        ),
+                  ),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      transform: Matrix4.translationValues(-10, 10, 0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: context.isDarkMode
+                            ? AppColors.darkGrey
+                            : const Color(0xffE6E6E6),
+                      ),
+                      child: Icon(
+                        Icons.play_arrow_rounded,
+                        color: context.isDarkMode
+                            ? const Color(0xff959595)
+                            : const Color(0xff555555),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                songs[index].title,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                songs[index].artist,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
                 ),
-                Text(
-                  songs[index].title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 16),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  songs[index].artist,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(
-              width: 14,
-            ),
-        itemCount: songs.length);
+              )
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 14,
+      ),
+      itemCount: songs.length,
+    );
   }
 }

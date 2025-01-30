@@ -6,6 +6,7 @@ import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/presentation/home/widgets/news_songs.dart';
+import 'package:spotify_clone/presentation/home/widgets/playlist.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,15 +45,19 @@ class _HomePageState extends State<HomePage>
             SizedBox(
               height: 260,
               child: TabBarView(
+                controller: _tabController,
                 children: [
-                  NewsSongs(),
+                  const NewsSongs(),
                   Container(),
                   Container(),
                   Container(),
                 ],
-                controller: _tabController,
               ),
-            )
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            const Playlist()
           ],
         ),
       ),
@@ -62,7 +67,7 @@ class _HomePageState extends State<HomePage>
   Widget _homeTopCard() {
     return Center(
       child: SizedBox(
-        height: 118,
+        height: 140,
         child: Stack(
           children: [
             Align(
@@ -88,6 +93,7 @@ class _HomePageState extends State<HomePage>
 
   Widget _tabs() {
     return TabBar(
+      tabAlignment: TabAlignment.start,
       controller: _tabController,
       isScrollable: true,
       indicatorColor: AppColors.primary,
