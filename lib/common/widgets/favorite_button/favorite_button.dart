@@ -17,34 +17,63 @@ class FavoriteButton extends StatelessWidget {
           builder: (context, state) {
         if (state is FavoriteButtonInitial) {
           bool isFavorite = songEntity.isFavorite;
-          return IconButton(
-              onPressed: () {
-                context
-                    .read<FavoriteButtonCubit>()
-                    .favoriteButtonUpdated(songEntity.songId);
-              },
-              icon: Icon(
-                isFavorite
-                    ? Icons.favorite_rounded
-                    : Icons.favorite_outline_rounded,
-                size: 25,
-                color: AppColors.darkGrey,
-              ));
+          ValueNotifier<bool> pressed = ValueNotifier(false);
+          return ValueListenableBuilder(
+              valueListenable: pressed,
+              builder: (_, __, ___) {
+                return IconButton(
+                    onPressed: () {
+                      pressed.value = true;
+                      context
+                          .read<FavoriteButtonCubit>()
+                          .favoriteButtonUpdated(songEntity.songId);
+                    },
+                    icon: pressed.value
+                        ? Icon(
+                            !isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded,
+                            size: 25,
+                            color: AppColors.darkGrey,
+                          )
+                        : Icon(
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded,
+                            size: 25,
+                            color: AppColors.darkGrey,
+                          ));
+              });
         }
         if (state is FavoriteButtonUpdated) {
-          return IconButton(
-              onPressed: () {
-                context
-                    .read<FavoriteButtonCubit>()
-                    .favoriteButtonUpdated(songEntity.songId);
-              },
-              icon: Icon(
-                state.isFavorite
-                    ? Icons.favorite_rounded
-                    : Icons.favorite_outline_rounded,
-                size: 25,
-                color: AppColors.darkGrey,
-              ));
+          bool isFavorite = state.isFavorite;
+          ValueNotifier<bool> pressed = ValueNotifier(false);
+          return ValueListenableBuilder(
+              valueListenable: pressed,
+              builder: (_, __, ___) {
+                return IconButton(
+                    onPressed: () {
+                      pressed.value = true;
+                      context
+                          .read<FavoriteButtonCubit>()
+                          .favoriteButtonUpdated(songEntity.songId);
+                    },
+                    icon: pressed.value
+                        ? Icon(
+                            !isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded,
+                            size: 25,
+                            color: AppColors.darkGrey,
+                          )
+                        : Icon(
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded,
+                            size: 25,
+                            color: AppColors.darkGrey,
+                          ));
+              });
         }
         return Container();
       }),
