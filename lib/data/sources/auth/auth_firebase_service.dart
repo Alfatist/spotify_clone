@@ -42,7 +42,7 @@ class AuthFirebaseServiceImp extends AuthFirebaseService {
         password: createUserRequest.password,
       );
 
-      FirebaseFirestore.instance.collection("Users").add({
+      FirebaseFirestore.instance.collection("Users").doc(data.user?.uid).set({
         "name": createUserRequest.fullName,
         "email": data.user?.email,
       });
