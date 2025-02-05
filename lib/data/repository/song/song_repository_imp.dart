@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:fpdart/src/either.dart';
 import 'package:spotify_clone/data/sources/songs/song_firebase_service.dart';
 import 'package:spotify_clone/domain/repository/song/song.dart';
@@ -22,5 +24,11 @@ class SongRepositoryImp extends SongsRepository {
   @override
   Future<bool> isFavoriteSong(String songId) async {
     return await sl<SongFirebaseService>().isFavoriteSong(songId);
+  }
+
+  @override
+  Future<Either> getUserFavoriteSongs() async {
+    // TODO: implement getUserFavoriteSongs
+    return await sl<SongFirebaseService>().getUserFavoriteSongs();
   }
 }
