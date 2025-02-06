@@ -35,52 +35,46 @@ class ProfilePage extends StatelessWidget {
   Widget _profileInfo(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileInfoCubit()..getUser(),
-      child: Expanded(
-        child: Container(
-          decoration: BoxDecoration(
-              color:
-                  context.isDarkMode ? const Color(0xff2C2B2B) : Colors.white,
-              borderRadius:
-                  const BorderRadius.vertical(bottom: Radius.circular(50))),
-          height: MediaQuery.sizeOf(context).height / 3.5,
-          child: BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
-              builder: (context, state) {
-            if (state is ProfileInfoLoading) {
-              return Container(
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator());
-            }
-            if (state is ProfileInfoLoaded) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 90,
-                    width: 90,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(state.userEntity.imageUrl!))),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(state.userEntity.email!),
-                  const SizedBox(height: 15),
-                  Text(state.userEntity.fullName!,
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
-                  Text(state.userEntity.fullName!,
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold)),
-                ],
-              );
-            }
-            if (state is ProfileInfoFailure) {
-              const Text("Please try again.");
-            }
-            return Container();
-          }),
-        ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: context.isDarkMode ? const Color(0xff2C2B2B) : Colors.white,
+            borderRadius:
+                const BorderRadius.vertical(bottom: Radius.circular(50))),
+        height: MediaQuery.sizeOf(context).height / 3.5,
+        width: double.infinity,
+        child: BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
+            builder: (context, state) {
+          if (state is ProfileInfoLoading) {
+            return Container(
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator());
+          }
+          if (state is ProfileInfoLoaded) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 90,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(state.userEntity.imageUrl!))),
+                ),
+                const SizedBox(height: 15),
+                Text(state.userEntity.email!),
+                const SizedBox(height: 15),
+                Text(state.userEntity.fullName!,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold)),
+              ],
+            );
+          }
+          if (state is ProfileInfoFailure) {
+            const Text("Please try again.");
+          }
+          return Container();
+        }),
       ),
     );
   }
@@ -97,7 +91,8 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          BlocBuilder(builder: (context, state) {
+          BlocBuilder<FavoriteSongsCubit, FavoriteSongsState>(
+              builder: (context, state) {
             if (state is FavoriteSongsLoading) {
               return const CircularProgressIndicator();
             }
